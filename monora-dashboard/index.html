@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monora</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Header Styles */
+.apple-header {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.apple-logo {
+    font-size: 21px;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+}
+
+.main-nav {
+    display: flex;
+    gap: 25px;
+    margin: 0 auto;
+}
+
+.main-nav a {
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.main-nav a:hover {
+    opacity: 1;
+    text-decoration: none;
+}
+
+.utility-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.utility-nav a {
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+}
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: #fff;
+      }
+
+      .no-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+      
+  <header class="apple-header">
+      <div class="header-container">
+          <a href="/" class="apple-logo">Monora</a>
+          <nav class="main-nav">
+              <a href="#store">Store</a>
+              <a href="#upcoming">Upcoming</a>
+              <a href="#essentials">Essentials</a>
+          </nav>
+          <!-- Bag, sign out and account need the PHP + MySQL backend, so they don't link anywhere on Vercel -->
+          <nav class="utility-nav">
+              <a href="#"><i class="fas fa-shopping-bag"></i></a>
+              <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+              <a href="#"><i class="fas fa-user"></i></a>
+          </nav>
+      </div>
+  </header>
+
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between p-35 max-md:p-10 pb-10"
+    >
+      <h1 class="text-5xl mb-3 md:mb-0 2xl:text-7xl font-semibold text-left">
+        Monora
+      </h1>
+      <div class="flex flex-col justify-end min-h-[75px] md:min-h-0">
+        <h3 class="text-3xl 2xl:text-2xl font-semibold text-left">
+          Designed to be loved.
+        </h3>
+      </div>
+    </div>     
+    
+    <div class="h-[80vh] p-5 sm:p-15 2xl:p-27" id="store">
+      <div class="h-full p-2 relative rounded-2xl overflow-hidden">
+        <video
+            id="iphonevideo"
+  src="assets/images/videos/ezgif-13ce65848f5ec9-vmake.mp4"
+  autoplay
+  muted
+  loop
+  playsinline
+  class="mx-auto rounded-4xl h-full object-cover"
+        ></video>
+         
+        <button
+          id="video-control"
+          class="absolute bottom-10 right-10 bg-[#DDDBDE] text-white p-2 rounded-full"
+          onclick="toggleVideo()"
+        >
+          <svg id="play-icon" class="h-6 w-6 text-gray-700">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          <svg id="pause-icon" class="h-6 w-6 hidden text-gray-700">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <!-- Bag and product pages need the PHP + MySQL backend, so these buttons don't link anywhere on Vercel -->
+      <div class="flex justify-center items-center gap-4">
+          <button type="button" class="add-to-cart py-2 px-4 rounded-4xl border border-black/60 hover:bg-black hover:text-white hover:border-black transition-colors duration-300">
+            Add to bag
+          </button>
+          <button type="button" class="py-2 px-10 rounded-4xl border border-black/60 hover:bg-black hover:text-white hover:border-black transition-colors duration-300">
+            Buy
+          </button>
+      </div>
+      <a href="#" class="mx-auto mt-4 text-neutral-700 hover:text-black transition-colors duration-300">Explore</a>
+    </div>
+
+    <!-- This div is get to know iphone -->
+    <div class="py-30 max-md:py-10 relative">
+      <h2
+        class="sm:p-15 2xl:p-27 text-3xl lg:text-5xl font-semibold pb-20 p-7 xl:p-35"
+      >
+        Get to know Monora.
+      </h2>
+      <div
+        class="w-full pl-35 max-lg:p-7 flex 2xl:pl-27 gap-2 no-scrollbar overflow-x-scroll max-w-full scroll-smooth"
+        id="scrollPage"
+      >
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/image1.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight">
+              Cutting-Edge Cameras
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Picture your best <br />
+              photos and videos.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone2.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight">
+              Chip and Battery Life
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Fast that lasts.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone3.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-black text-lg font-semibold tracking-tight">
+              Innovation
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-black font-semibold tracking-wide"
+            >
+              Beautiful and durable, by design.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone4.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight mb-2">
+              Apple Intelligence
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Powerful possibilities.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone5.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-black font-semibold tracking-tight mb-1">
+              Environment
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-black font-semibold tracking-wide"
+            >
+              Recycle. Reuse. Repeat.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone6.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight">
+              Privacy
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Your data. <br />
+              Just where you want it.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone7.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight">
+              Customize your iphone
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Make it you. <br />
+              Through and through.
+            </h1>
+          </div>
+        </div>
+        <div class="relative flex-shrink-0">
+          <img
+            src="assets/images/gettoknow/iphone8.jpg"
+            alt="image1"
+            class="rounded-4xl cursor-pointer h-[90%] w-[95%]"
+          />
+          <div class="absolute top-5 left-7">
+            <p class="text-lg text-white font-semibold tracking-tight">
+              Peace of Mind
+            </p>
+            <h1
+              class="text-[27px] leading-[1.2] text-white font-semibold tracking-wide"
+            >
+              Helpful features.<br />
+              Just in case.
+            </h1>
+          </div>
+        </div>
+      </div>
+      <!-- Chevron Left -->
+      <div
+        class="absolute bottom-25 right-30 max-md:bottom-15 max-md:right-20 flex gap-5"
+      >
+        <button
+          class="p-2 bg-[#E9E9EB] rounded-full"
+          id="scroll-left"
+          onclick="leftScroll()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+        </button>
+
+        <!-- Chevron Right -->
+        <button
+          class="p-2 bg-[#E9E9EB] rounded-full"
+          id="scroll-right"
+          onclick="rightScroll()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+
+<!-- Upcoming section -->
+<section class="py-10 md:py-30 relative bg-[#F5F5F7]" id="upcoming">
+  <div class="flex flex-col md:flex-row max-md:text-start py-17 max-md:px-5 md:px-30 items-start md:items-center justify-between">
+    <h2 class="text-2xl md:text-5xl font-semibold text-left">
+      Upcoming
+    </h2>
+    <p class="text-blue-400 text-md md:text-lg cursor-pointer text-left">
+      View all >
+    </p>
+  </div>
+  <div class="w-full max-md:px-2 px-35 flex items-center justify-between 2xl:pl-[102px] no-scrollbar overflow-x-scroll max-w-full scroll-smooth">
+    <!-- Product 1 -->
+    <div class="items-center flex-shrink-0 flex flex-col w-[350px] relative">
+      <div class="absolute top-5 right-5 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
+        Coming Soon
+      </div>
+      <img
+        src="assets/images/mainPhoneSilver.png"
+        alt="Monora Note G1"
+        class="pb-10 w-full max-w-[250px]"
+      />
+      <div class="flex items-center gap-[5px] pb-10">
+        <span class="h-3 w-3 bg-[#BFA48F] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#C2BCB2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#F7F6F2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#3C3C3D] rounded-full"></span>
+      </div>
+
+      <h1 class="text-[28px] font-semibold mb-4">Monora Note G1</h1>
+      <p class="text-[17px] font-semibold text-neutral-600">
+        Premium performance in a sleek design.
+      </p>
+      <span class="py-3 font-bold text-lg text-neutral-700">From $799</span>
+      <div class="py-5 flex gap-8 items-center">
+        <button class="py-3 px-6 text-gray-500 bg-gray-200 rounded-full cursor-not-allowed" disabled>
+          Coming Soon
+        </button>
+        <a href="#" class="text-lg font-semibold text-[#3384D4]">Learn more ></a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="items-center flex-shrink-0 flex flex-col w-[350px] relative">
+      <div class="absolute top-5 right-5 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
+        Coming Soon
+      </div>
+      <img
+        src="assets/images/upcomingRed.png"
+        alt="Monora Zero 1st Version"
+        class="pb-10 w-full max-w-[250px]"
+      />
+      <div class="flex items-center gap-[5px] pb-10">
+        <span class="h-3 w-3 bg-[#BFA48F] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#C2BCB2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#F7F6F2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#3C3C3D] rounded-full"></span>
+      </div>
+
+      <h1 class="text-[28px] font-semibold mb-4">Monora Zero 1st Version</h1>
+      <p class="text-[17px] font-semibold text-neutral-600">
+        The original reimagined.
+      </p>
+      <span class="py-3 font-bold text-lg text-neutral-700">From $699</span>
+      <div class="py-5 flex gap-8 items-center">
+        <button class="py-3 px-6 text-gray-500 bg-gray-200 rounded-full cursor-not-allowed" disabled>
+          Coming Soon
+        </button>
+        <a href="#" class="text-lg font-semibold text-[#3384D4]">Learn more ></a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="items-center flex-shrink-0 flex flex-col w-[350px] relative">
+      <div class="absolute top-5 right-5 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
+        Coming Soon
+      </div>
+      <img
+        src="assets/images/upcomingPurple.png"
+        alt="Monora Note G2i"
+        class="pb-10 w-full max-w-[250px]"
+      />
+      <div class="flex items-center gap-[5px] pb-10">
+        <span class="h-3 w-3 bg-[#BFA48F] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#C2BCB2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#F7F6F2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#3C3C3D] rounded-full"></span>
+      </div>
+
+      <h1 class="text-[28px] font-semibold mb-4">Monora Note G2i</h1>
+      <p class="text-[17px] font-semibold text-neutral-600">
+        Next-level innovation.
+      </p>
+      <span class="py-3 font-bold text-lg text-neutral-700">From $899</span>
+      <div class="py-5 flex gap-8 items-center">
+        <button class="py-3 px-6 text-gray-500 bg-gray-200 rounded-full cursor-not-allowed" disabled>
+          Coming Soon
+        </button>
+        <a href="#" class="text-lg font-semibold text-[#3384D4]">Learn more ></a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="items-center flex-shrink-0 flex flex-col w-[350px] relative">
+      <div class="absolute top-5 right-5 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
+        Coming Soon
+      </div>
+      <img
+        src="assets/images/upcomingSand.png"
+        alt="Monora Zero G1i"
+        class="pb-10 w-full max-w-[250px]"
+      />
+      <div class="flex items-center gap-[5px] pb-10">
+        <span class="h-3 w-3 bg-[#BFA48F] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#C2BCB2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#F7F6F2] rounded-full"></span>
+        <span class="h-3 w-3 bg-[#3C3C3D] rounded-full"></span>
+      </div>
+
+      <h1 class="text-[28px] font-semibold mb-4">Monora Zero G1i</h1>
+      <p class="text-[17px] font-semibold text-neutral-600">
+        Compact power in your pocket.
+      </p>
+      <span class="py-3 font-bold text-lg text-neutral-700">From $749</span>
+      <div class="py-5 flex gap-8 items-center">
+        <button class="py-3 px-6 text-gray-500 bg-gray-200 rounded-full cursor-not-allowed" disabled>
+          Coming Soon
+        </button>
+        <a href="#" class="text-lg font-semibold text-[#3384D4]">Learn more ></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Why apple is important section -->
+
+    <section class="py-[150px] bg-[#F5F5F7] relative">
+      <div
+        class="flex flex-col md:flex-row max-md:text-start py-15 max-md:px-5 md:px-30 items-start md:items-center justify-between"
+      >
+        <h2
+          class="text-2xl md:text-3xl lg:text-6xl font-semibold mb-5 text-left"
+        >
+          Why Monora is the best <br />
+          place to buy Phone.
+        </h2>
+        <p class="text-blue-400 text-md md:text-lg cursor-pointer text-left">
+          Shop Phone >
+        </p>
+      </div>
+      <div
+        class="w-full px-35 flex gap-5 max-md:px-5 no-scrollbar overflow-x-scroll max-w-full scroll-smooth"
+        id="scrollPlaceToBuy"
+      >
+        <div
+          class="p-7 relative bg-[#FFFFFF] flex-shrink-0 rounded-4xl h-[320px] w-[400px]"
+        >
+          <img
+            src="assets/images/placetobuy/buy1.png"
+            alt="Deliver"
+            class="mb-5"
+          />
+          <div>
+            <h1 class="text-[29px] leading-8 font-semibold mb-3">
+              Free Delivery.
+            </h1>
+            <p class="font-semibold text-md text-neutral-600">
+              Get free delivery direct to your door.
+            </p>
+          </div>
+          <button
+            class="absolute w-9 h-9 rounded-full bg-black flex items-center justify-center bottom-5 right-5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="w-7 h-7"
+            >
+              <line
+                x1="256"
+                y1="144"
+                x2="256"
+                y2="368"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+              <line
+                x1="144"
+                y1="256"
+                x2="368"
+                y2="256"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="p-7 relative bg-[#FFFFFF] flex-shrink-0 rounded-4xl h-[320px] w-[400px]"
+        >
+          <img
+            src="assets/images/placetobuy/buy2.png"
+            alt="Deliver"
+            class="mb-5"
+          />
+          <div>
+            <h1 class="text-[29px] leading-8 font-semibold mb-3">
+              Shop one on one with a Specialist online.
+            </h1>
+            <p class="font-semibold text-md text-neutral-600">
+              Choose your next Phone with help from a Specialist online.
+            </p>
+          </div>
+          <button
+            class="absolute w-9 h-9 rounded-full bg-black flex items-center justify-center bottom-5 right-5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="w-7 h-7"
+            >
+              <line
+                x1="256"
+                y1="144"
+                x2="256"
+                y2="368"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+              <line
+                x1="144"
+                y1="256"
+                x2="368"
+                y2="256"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="p-7 relative bg-[#FFFFFF] flex-shrink-0 rounded-4xl h-[320px] w-[400px]"
+        >
+          <img
+            src="assets/images/placetobuy/buy3.png"
+            alt="Deliver"
+            class="mb-5"
+          />
+          <div>
+            <h1 class="text-[29px] leading-8 font-semibold mb-3">
+              Explore a Shopping <br />
+              experience designed <br />
+              around you.
+            </h1>
+            <p class="font-semibold text-md text-neutral-600">
+              When you shop in the <br />
+              Monora Store app.
+            </p>
+          </div>
+          <button
+            class="absolute w-9 h-9 rounded-full bg-black flex items-center justify-center bottom-5 right-5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="w-7 h-7"
+            >
+              <line
+                x1="256"
+                y1="144"
+                x2="256"
+                y2="368"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+              <line
+                x1="144"
+                y1="256"
+                x2="368"
+                y2="256"
+                stroke="#fff"
+                stroke-width="40"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-25 right-30 max-md:bottom-15 max-md:right-20 flex md:hidden gap-5"
+      >
+        <button
+          class="p-2 bg-[#E9E9EB] rounded-full"
+          id="scroll-left"
+          onclick="leftScroll('scrollPlaceToBuy')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+        </button>
+
+        <!-- Chevron Right -->
+        <button
+          class="p-2 bg-[#E9E9EB] rounded-full"
+          id="scroll-right"
+          onclick="rightScroll('scrollPlaceToBuy')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
+    <section class="p-[104px] max-lg:p-[5px]">
+      <div
+        class="flex max-md:flex-col mb-15 items-start md:items-center md:justify-between px-5 md:px-35"
+      >
+        <h2
+          class="text-2xl md:text-3xl lg:text-6xl font-semibold mb-5 text-left"
+          id="essentials"
+        >
+          Monora essentials.
+        </h2>
+        <p class="text-blue-400 text-md md:text-lg cursor-pointer text-left">
+          Shop Monora >
+        </p>
+      </div>
+
+      <!-- Scrollable card container -->
+      <div
+        class="gap-5 flex px-7 items-center overflow-x-auto md:overflow-visible scroll-smooth relative"
+      >
+        <!-- First Card -->
+        <div class="rounded-3xl max-w-[500px] w-full flex-shrink-0">
+          <div
+            class="flex flex-col rounded-t-4xl items-center justify-center p-10 bg-[#F5F5F7] h-full text-center"
+          >
+            <h2 class="font-semibold text-3xl">Monora accessories</h2>
+            <p class="text-[18px] text-neutral-700 py-2">
+              Explore colorful cases, USB‑C power adapters, <br />
+              MagSafe accessories, and more.
+            </p>
+            <a href="#" class="text-blue-500 font-semibold">
+              Shop Monora accessories >
+            </a>
+          </div>
+          <img
+            src="assets/images/essentials/essen1.jpg"
+            class="w-full object-cover rounded-b-4xl"
+          />
+        </div>
+
+        <!-- Second Card -->
+        <div class="rounded-3xl max-w-[500px] w-full flex-shrink-0">
+          <div
+            class="flex flex-col rounded-t-4xl items-center justify-center p-10 bg-[#F5F5F7] h-full text-center"
+          >
+            <h2 class="font-semibold text-3xl">AirTag</h2>
+            <p class="text-[18px] text-neutral-700 py-2">
+              Attach one to your keys. Put another in your backpack. <br />
+              If they’re misplaced, just use the Find My app.
+            </p>
+            <a href="#" class="text-blue-500 font-semibold">Buy ></a>
+          </div>
+          <img
+            src="assets/images/essentials/essen2.jpg"
+            class="w-full object-cover rounded-b-4xl"
+          />
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script>
+    const video = document.getElementById("iphonevideo");
+    const playIcon = document.getElementById("play-icon");
+    const pauseIcon = document.getElementById("pause-icon");
+
+    // Show the pause icon while the video plays (it autoplays) and the play icon while it's paused
+    function updateVideoIcon() {
+      playIcon.classList.toggle("hidden", !video.paused);
+      pauseIcon.classList.toggle("hidden", video.paused);
+    }
+
+    video.addEventListener("play", updateVideoIcon);
+    video.addEventListener("pause", updateVideoIcon);
+    updateVideoIcon();
+
+    function toggleVideo() {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
+    const scrollContainer = document.getElementById("scrollPage");
+
+    function leftScroll(id = "scrollPage") {
+      document.getElementById(id).scrollBy({ left: -400, behavior: "smooth" });
+    }
+
+    function rightScroll(id = "scrollPage") {
+      document.getElementById(id).scrollBy({ left: 400, behavior: "smooth" });
+    }
+
+    // Auto-scroll every 5 seconds and go back to the start after the last card
+    setInterval(() => {
+      const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+      if (scrollContainer.scrollLeft >= maxScrollLeft - 5) {
+        scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollContainer.scrollBy({ left: 430, behavior: "smooth" });
+      }
+    }, 5000);
+  </script>
+</html>

@@ -1,0 +1,8 @@
+# Private API keys (see api/core/secrets.example.php)
+api/core/secrets.php
+
+# Database dump: has real users' names, emails, birth dates and password hashes
+monora.sql
+
+# Claude Code preview settings for this PC
+.claude/
